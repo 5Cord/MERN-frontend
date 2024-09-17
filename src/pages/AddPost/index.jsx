@@ -87,7 +87,7 @@ useEffect(() => {
           alert('Ошибка при получении статьи');
         })
     }
-  }, [])
+  }, [id])
 
   const options = React.useMemo(
     () => ({
