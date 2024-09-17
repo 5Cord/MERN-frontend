@@ -20,7 +20,7 @@ export const Home = () => {
   useEffect(() => {
     dispatch(fetchPosts());
     dispatch(fetchTags());
-  }, [])
+  }, [dispatch])
 
   const [value, setValue] = useState(0);
 

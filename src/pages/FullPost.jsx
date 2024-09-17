@@ -18,7 +18,7 @@ useEffect(() => {
       console.warn(err);
       alert('Ошибка')
     });
-  }, [])
+  }, [id])
 
   if (isLoading) {
     return <Post isLoading={isLoading} isFullPost />

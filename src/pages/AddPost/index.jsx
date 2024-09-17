@@ -22,6 +22,7 @@ export const AddPost = () => {
   const [imageUrl, setImageUrl] = React.useState('');
   const inputFileRef = React.useRef(null);
 
+  console.log(isLoading);
   const isEditing = Boolean(id);
 
   const handleChangeFile = async (event) => {
