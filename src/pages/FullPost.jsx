@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { Post } from "../components/Post";
 import { Index } from "../components/AddComment";
@@ -10,8 +10,7 @@ export const FullPost = () => {
   const [data, setData] = React.useState();
   const [isLoading, setLoading] = React.useState(true);
   const { id } = useParams();
-
-  React.useEffect(() => {
+useEffect(() => {
     axios.get(`/posts/${id}`).then(res => {
       setData(res.data);
       setLoading(false)
@@ -20,7 +19,6 @@ export const FullPost = () => {
       alert('Ошибка')
     });
   }, [])
-  const params = useParams();
 
   if (isLoading) {
     return <Post isLoading={isLoading} isFullPost />

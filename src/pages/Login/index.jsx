@@ -15,7 +15,7 @@ import { fetchAuth, selectIsAuth } from "../../redux/slices/auth";
 export const Login = () => {
   const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
-  const { register, handleSubmit, formState: { errors, isValid } } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       email: 'test@test.ru',
       password: '123'

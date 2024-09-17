@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
@@ -72,7 +72,7 @@ export const AddPost = () => {
     }
   };
 
-  React.useEffect(() => {
+useEffect(() => {
     if (id) {
       axios
         .get(`/posts/${id}`)

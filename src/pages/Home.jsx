@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Grid from '@mui/material/Grid';
 import { useState } from 'react';
-
-import axios from '../Axios';
 
 import { Post } from '../components/Post';
 import { TagsBlock } from '../components/TagsBlock';
@@ -19,7 +17,7 @@ export const Home = () => {
   const isPostsLoading = posts.status === 'loading';
   const isTagsLoading = tags.status === 'loading';
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(fetchPosts());
     dispatch(fetchTags());
   }, [])
@@ -40,19 +38,25 @@ export const Home = () => {
       </Tabs>
       <Grid container spacing={4}>
         <Grid xs={8} item>
-          {(isPostsLoading ? [...Array(5)] : (!value ? posts.items : sortedPosts)).map((obj, index) => isPostsLoading ? <Post key={index} isLoading={true} /> : (
-            <Post
-              id={obj._id}
-              title={obj.title}
-              imageUrl={obj.imageUrl ? `http://localhost:4444${obj.imageUrl}` : ''}
-              user={obj.user}
-              createdAt={obj.createdAt}
-              viewsCount={obj.viewsCount}
-              commentsCount={3}
-              tags={obj.tags}
-              isEditable={userData?._id === obj.user._id}
-            />
-          ))}
+          {(isPostsLoading ? [...Array(5)] : (!value ? posts.items : sortedPosts)).map((obj, index) => {
+            if (!obj) return null; // Добавь проверку на null
+            return isPostsLoading ? <Post key={index} isLoading={true} /> : (
+              <Post
+                key={obj._id}
+                id={obj._id}
+                title={obj.title}
+                imageUrl={obj.imageUrl ? `http://localhost:4444${obj.imageUrl}` : ''}
+                user={obj.user}
+                createdAt={obj.createdAt}
+                viewsCount={obj.viewsCount}
+                commentsCount={3}
+                tags={obj.tags}
+                isEditable={userData?._id === obj.user._id}
+              />
+            );
+          })}
+
+
         </Grid>
         <Grid xs={4} item>
           <TagsBlock items={tags.items} isLoading={isTagsLoading} />
